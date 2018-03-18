@@ -2,7 +2,7 @@ import { makeExecutableSchema } from 'graphql-tools';
 import resolvers from './resolvers';
 
 const typeDefs = `
-  type Query {
+  type Query @cacheControl(maxAge: 86400) {
     character(id: Int!): Character
     characters(page: Int): [Character]
     episode(id: Int!): Episode
@@ -11,7 +11,7 @@ const typeDefs = `
     locations(page: Int): [Location]
   }
 
-  type Character {
+  type Character @cacheControl(maxAge: 86400) {
     id: Int,
     name: String,
     species: String,
@@ -24,7 +24,7 @@ const typeDefs = `
     image: String,
   }
 
-  type Episode {
+  type Episode @cacheControl(maxAge: 86400) {
     id: Int,
     name: String,
     episode: String,
@@ -32,7 +32,7 @@ const typeDefs = `
     characters: [Character],
   }
 
-  type Location {
+  type Location @cacheControl(maxAge: 86400) {
     id: Int,
     name: String,
     type: String,

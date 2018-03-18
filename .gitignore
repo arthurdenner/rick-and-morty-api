@@ -3,7 +3,7 @@ deploy.js
 .cache/
 node_modules
 .env
-.env.*
+.env
 .eslintrc
 helpers
 public/

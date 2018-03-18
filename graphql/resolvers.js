@@ -33,10 +33,8 @@ const resolvers = {
     },
   },
   Character: {
-    episodes(character) {
-      const urls = character.episode.map(url =>
-        axios.get(url).then(({ data }) => data)
-      );
+    episodes({ episode }) {
+      const urls = episode.map(url => axios.get(url).then(({ data }) => data));
 
       return axios.all(urls).then(axios.spread((...episodes) => episodes));
     },
@@ -53,6 +51,24 @@ const resolvers = {
       }
 
       return axios.get(origin.url).then(({ data }) => data);
+    },
+  },
+  Episode: {
+    characters({ characters }) {
+      const urls = characters.map(url =>
+        axios.get(url).then(({ data }) => data)
+      );
+
+      return axios.all(urls).then(axios.spread((...chars) => chars));
+    },
+  },
+  Location: {
+    residents({ residents }) {
+      const urls = residents.map(url =>
+        axios.get(url).then(({ data }) => data)
+      );
+
+      return axios.all(urls).then(axios.spread((...chars) => chars));
     },
   },
 };
